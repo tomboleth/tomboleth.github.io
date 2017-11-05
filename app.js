@@ -56609,7 +56609,14 @@ window.App = {
                 __WEBPACK_IMPORTED_MODULE_4_jquery___default()('#web3-play-with-balance').each(function() {
                     var elem = __WEBPACK_IMPORTED_MODULE_4_jquery___default()(this);
                     elem.bind("click", function(event){
-                        instance.playWithWinnings.sendTransaction({from:web3.eth.accounts[0]});
+                        instance.playWithWinnings.sendTransaction({from:web3.eth.accounts[0]}).then(function(r){console.log(r); self.handleTransaction("toto",r);}) ;
+                    });
+
+                });
+                __WEBPACK_IMPORTED_MODULE_4_jquery___default()('#web3-withdraw').each(function() {
+                    var elem = __WEBPACK_IMPORTED_MODULE_4_jquery___default()(this);
+                    elem.bind("click", function(event){
+                        instance.withdraw.sendTransaction({from:web3.eth.accounts[0]}).then(function(r){console.log(r); self.handleTransaction("toto",r);}) ;
                     });
 
                 });
@@ -56667,7 +56674,7 @@ window.App = {
             __WEBPACK_IMPORTED_MODULE_4_jquery___default()("#alert").append(`<div class="uk-alert-succes" uk-alert=""><a class="uk-alert-close" uk-close=""></a>
                           <p class="uk-text-center">Transaction pending, you can see it on
                           <a href="https://ropsten.etherscan.io/tx/${transaction}">Etherscan</a></p></div>`);}
-        else { addAlert('Uh oh, something went wrong');}
+        else { console.log('Uh oh, something went wrong');}
     },
 
     addInfo: function(text){
@@ -56696,6 +56703,7 @@ window.App = {
         __WEBPACK_IMPORTED_MODULE_4_jquery___default()(".web3-player-balance").append(`${b} &Xi;`);
         if (balance > bet) {
             __WEBPACK_IMPORTED_MODULE_4_jquery___default()("#web3-play-with-balance").prop('disabled', false);
+            __WEBPACK_IMPORTED_MODULE_4_jquery___default()("#web3-withdraw").prop('disabled', false);
         }
     },
 
